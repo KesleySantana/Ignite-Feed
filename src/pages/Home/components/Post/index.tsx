@@ -3,22 +3,52 @@ import { Profile, PostContainer, Info, Line, ConfirmDeleteComment } from "./styl
 import { Comment, IComment } from '../Comment';
 import { v4 as uuidv4,} from 'uuid';
 
+import { format, formatDistance, formatDistanceToNow, formatDistanceToNowStrict } from 'date-fns';
+import ptBR from 'date-fns/locale/pt-BR';
+
+
+export interface IPost{
+    id:number,  
+    // date: any,
+    author: {
+        avatarUrl:string,
+        name:string,
+        role:string
+    },
+    content:{
+        greeting:string,
+        paragraph:string,
+        gitHub:string
+    }
+}
 
 
 
-export function Post( ){
+
+
+export function Post( { author,id,content }:IPost ){
 const [comment, setComment] = useState<string>("")
 const [comments, setComments] = useState([] as IComment[])
 
+const date = new Date()
 
+const publishedDateFormated = format(date, "'Publicado às' HH:mm",{
+    locale: ptBR
+})
 
 
 function handleNewComment(){
+
+    // const publishedAt = formatDistanceToNowStrict(date,{
+    //     locale: ptBR,
+    //     addSuffix: true
+    // })
     const newComment = {
         id: uuidv4(),
-        content: comment
+        content: comment,
+        publishedAt: publishedDateFormated
     }
-    setComments([newComment, ...comments])
+    setComments([...comments, newComment])
     setComment("")
 }
 
@@ -32,18 +62,17 @@ function handleDeleteComment(id:string){
         <PostContainer>
 
             <Profile>
-                <img src="https://avatars.githubusercontent.com/u/8683378?v=4" alt="" />
+                <img src={author.avatarUrl} alt="" />
                 <div>
-                    <h2>Jane Cooper</h2>
-                    <span>UI Designer</span>
+                    <h2>{author.name}</h2>
+                    <span>{author.role}</span>
                 </div>
             </Profile>
 
             <Info>
-                <p>Fala galeraa 👋</p>
-                <p>Acabei de subir mais um projeto no meu portifa. É um projeto que fiz no NLW Return, evento da Rocketseat. O nome do projeto é DoctorCare 🚀</p>
-
-                <p>github.com/JaneCooper</p>
+                <p>{content.greeting}</p>
+                <p>{content.paragraph}</p>
+                <a href={content.gitHub} target={"_blank"}>{`github.com/${author.name}`}</a>
             </Info>
 
             <Line />
@@ -54,7 +83,7 @@ function handleDeleteComment(id:string){
 
             
             {comments.map(item => (
-                <Comment key={item.id} comment={item} onDeleteComment={handleDeleteComment}/>
+                <Comment key={item.id}  comment={item} onDeleteComment={handleDeleteComment}/>
             ))}
 
 

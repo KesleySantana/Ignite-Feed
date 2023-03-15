@@ -109,7 +109,8 @@ export const Info = styled.div`
     font-weight: 400;
     color: ${(props) => props.theme["gray6 (text)"]};
 
-    p:last-child{
+    a:last-child{
+        text-decoration: none;
         color: ${(props) => props.theme["green-light"]};
         cursor: pointer;
     }

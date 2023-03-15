@@ -5,7 +5,8 @@ import { CommentContainer, Feedback } from "./styled";
 
 export interface IComment {
     id:string,
-    content:string
+    content:string,
+    publishedAt:string
 }
 
 interface ICommentProps{
@@ -18,6 +19,9 @@ export function Comment({ comment, onDeleteComment }:ICommentProps) {
 const [countLike, setCountLike] = useState<number>(0)
  
 
+
+
+
 function countOfLike() {
     const quantityLike =  countLike + 1
     setCountLike(quantityLike)
@@ -27,6 +31,7 @@ function handleDeleteComment(){
     onDeleteComment(comment.id)
 }
 
+
     return(
         <CommentContainer>
             <img  src="https://avatars.githubusercontent.com/u/8683378?v=4" alt="" />
@@ -34,7 +39,7 @@ function handleDeleteComment(){
             <Feedback>
                 <div>
                     <h2>Devon Lane</h2>
-                    <span>Cerca de 2h</span>
+                    <span>{comment.publishedAt}</span>
                 </div>
 
                 <div className="Comment">

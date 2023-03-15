@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 
-export const HomeContainer = styled.body`
+export const HomeContainer = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -41,7 +41,7 @@ export const HeaderContainer = styled.header`
     } */
 `;
 
-export const BodyContainer = styled.body`
+export const BodyContainer = styled.div`
     display: flex;
     flex-direction: row;
     align-items: flex-start;
