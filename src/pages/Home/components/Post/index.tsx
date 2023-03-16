@@ -25,28 +25,45 @@ export interface IPost{
 
 
 
-
 export function Post( { author,id,content }:IPost ){
 const [comment, setComment] = useState<string>("")
 const [comments, setComments] = useState([] as IComment[])
 
-const date = new Date()
+const [gitHubProfile, setGitHubProfile] = useState({} as any)
 
+const date = new Date()
 const publishedDateFormated = format(date, "'Publicado às' HH:mm",{
     locale: ptBR
 })
 
+//Consultando API de usuários do GitHub
+fetch('https://api.github.com/users')
+    .then(async response =>{  
+    var data = await response.json()
+    var randomProfile = data[Math.floor(Math.random() * data.length)]
+    setGitHubProfile(randomProfile)
+    })
+    .catch(error => console.log(error))
+
+
+
 
 function handleNewComment(){
 
-    // const publishedAt = formatDistanceToNowStrict(date,{
-    //     locale: ptBR,
-    //     addSuffix: true
-    // })
+    fetch('https://api.github.com/users')
+    .then(async response =>{  
+    var data = await response.json()
+    var randomProfile = data[Math.floor(Math.random() * data.length)]
+    setGitHubProfile(randomProfile)
+    })
+    .catch(error => console.log(error))
+    
     const newComment = {
         id: uuidv4(),
         content: comment,
-        publishedAt: publishedDateFormated
+        publishedAt: publishedDateFormated,
+        avatarUrl: gitHubProfile["avatar_url"],
+        login: gitHubProfile["login"]
     }
     setComments([...comments, newComment])
     setComment("")
@@ -83,7 +100,7 @@ function handleDeleteComment(id:string){
 
             
             {comments.map(item => (
-                <Comment key={item.id}  comment={item} onDeleteComment={handleDeleteComment}/>
+                <Comment key={item.id} comment={item} onDeleteComment={handleDeleteComment}/>
             ))}
 
 

@@ -14,46 +14,35 @@ const posts:IPost[] = [
     id:1,
     // date: new Date(),
     author:{
-      name:'Julia Khusainova',
+      name:'Felipe Soares',
       role: 'UI Designer',
-      avatarUrl: 'https://avatars.githubusercontent.com/u/849971?v=4',
+      avatarUrl: 'https://avatars.githubusercontent.com/u/112789796?v=4',
     },
     content:{
       greeting: 'Fala galeraa 👋',
-      paragraph: 'Acabei de subir mais um projeto no meu portifa. É um projeto que fiz no NLW Return, evento da Rocketseat. O nome do projeto é DoctorCare 🚀',
-      gitHub: 'https://github.com/Julia',
+      paragraph: 'Acabei de subir mais um projeto no meu portifa. É um projeto que fiz no NLW Return. O nome do projeto é DoctorCare 🚀',
+      gitHub: 'https://github.com/soaaresc',
     }
   },
   {
     id:2,
     // date: new Date(),
     author:{
-      name:'Alexandre Santos',
+      name:'Guilherme Pimentel',
       role: 'Dev Back-end',
-      avatarUrl: 'https://avatars.githubusercontent.com/u/209983?v=4',
+      avatarUrl: 'https://avatars.githubusercontent.com/u/85652645?v=4',
     },
     content:{
       greeting: 'Fala galeraa 👋',
       paragraph: 'Acabei de subir mais um projeto no meu portifa. É um projeto que fiz no NLW Return, evento da Rocketseat. O nome do projeto é DoctorCare 🚀',
-      gitHub:'https://github.com/AlexandreSantos'
+      gitHub:'https://github.com/Gui14'
     }
   }
 ]
 
 
 export function Home() {
-const [profile, setProfile] = useState([] as any)
-
-
-useEffect(() => {
-    fetch('https://api.github.com/users/KesleySantana')
-    .then(response => response.json())
-    .then(data => setProfile([data]))
-
-},[])
-
-
-
+  
 
   return(
     <HomeContainer>
@@ -67,8 +56,6 @@ useEffect(() => {
         <AsideProfile>
           <div><img  src={backgroundImageFolhas} alt=""/></div>
           <div>
-
-
             <img className="Avatar" src="https://avatars.githubusercontent.com/u/110929963?v=4" alt="" />
               <h2>Kesley Santana</h2>
               <span>Dev Front-End</span>
