@@ -29,7 +29,7 @@ export function Post( { author,id,content }:IPost ){
 const [comment, setComment] = useState<string>("")
 const [comments, setComments] = useState([] as IComment[])
 
-const [gitHubProfile, setGitHubProfile] = useState({} as any)
+const [gitHubProfilesComments, setGitHubProfilesComments] = useState({} as any)
 
 const date = new Date()
 const publishedDateFormated = format(date, "'Publicado às' HH:mm",{
@@ -41,7 +41,7 @@ fetch('https://api.github.com/users')
     .then(async response =>{  
     var data = await response.json()
     var randomProfile = data[Math.floor(Math.random() * data.length)]
-    setGitHubProfile(randomProfile)
+    setGitHubProfilesComments(randomProfile)
     })
     .catch(error => console.log(error))
 
@@ -54,7 +54,7 @@ function handleNewComment(){
     .then(async response =>{  
     var data = await response.json()
     var randomProfile = data[Math.floor(Math.random() * data.length)]
-    setGitHubProfile(randomProfile)
+    setGitHubProfilesComments(randomProfile)
     })
     .catch(error => console.log(error))
     
@@ -62,8 +62,8 @@ function handleNewComment(){
         id: uuidv4(),
         content: comment,
         publishedAt: publishedDateFormated,
-        avatarUrl: gitHubProfile["avatar_url"],
-        login: gitHubProfile["login"]
+        avatarUrl: gitHubProfilesComments["avatar_url"],
+        login: gitHubProfilesComments["login"]
     }
     setComments([...comments, newComment])
     setComment("")
@@ -89,7 +89,7 @@ function handleDeleteComment(id:string){
             <Info>
                 <p>{content.greeting}</p>
                 <p>{content.paragraph}</p>
-                <a href={content.gitHub} target={"_blank"}>{`github.com/${author.name}`}</a>
+                <a href={"#"} target={""}>{`github.com/${author.name}`}</a>
             </Info>
 
             <Line />

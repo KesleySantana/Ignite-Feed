@@ -42,7 +42,7 @@ const posts:IPost[] = [
 
 
 export function Home() {
-  
+
 
   return(
     <HomeContainer>
